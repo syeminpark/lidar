@@ -58,15 +58,6 @@ def getTFminiData():
                 ser.reset_input_buffer()
 
 
-# def checkUnity():
-#     if():
-#         send = True
-#     else:
-#         send = False
-
-
-# checkUnity()
-
 while __name__ == '__main__':
     try:
         if ser.is_open == False:
