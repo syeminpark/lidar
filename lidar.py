@@ -8,17 +8,17 @@ maxDist = 130  # 센서 벗어나는 거리
 testCounter = 1
 closeCounter = 1
 farCounter = 1
-
-send = True  # 유니티 인풋 default=False
-reset = False
+state = 0  # 유니티 인풋 default=False
 ser = serial.Serial("COM7", 115200)
 
 
 # def checkUnity():
 #     if():
-#         send = True
-#     else:
-#         send = False
+#         send = 1
+#     elif:
+#         send = 2
+#     elif:
+#          state=0
 
 
 def getTFminiData():
@@ -51,7 +51,7 @@ def getTFminiData():
 
                 # 대체물
                  # checkUnity()
-                # if(send==False):
+                # if(send !=1):
                     # break
 
                 # print('(', distance, ',', strength, ')')
@@ -61,26 +61,25 @@ def getTFminiData():
 while __name__ == '__main__':
     try:
         if ser.is_open == False:
-
             ser.open()
 
-        if(send == True):
+        if(state == 0):
+            testCounter = 1
+            closeCounter = 1
+            farCounter = 1
+
+        elif(state == 1):
 
             getTFminiData()
-            reset = False
-            send = False
 
-        elif(send == False and reset == False):
+        elif(state == 2):
             if(closeCounter > farCounter):
                 result = "FAR"
             else:
                 result = "CLOSE"
-            reset = True
-            send = True  # 지우셈
-            print(result)  # 지우셈
-            testCounter = 1
-            closeCounter = 1
-            farCounter = 1
+
+            state = 0
+            print(result)
 
     except KeyboardInterrupt:   # Ctrl+C
         if ser != None:
